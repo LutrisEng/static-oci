@@ -7,3 +7,4 @@ RUN build-go kustomize https://github.com/kubernetes-sigs/kustomize.git kustomiz
 FROM scratch
 
 COPY --from=builder /app/kustomize /usr/local/bin/kustomize
+ENTRYPOINT ["/usr/local/bin/kustomize"]

@@ -3,6 +3,7 @@
 FROM build as builder
 
 RUN clone https://github.com/hadolint/hadolint.git v2.12.0 \
+ && cabal update \
  && cabal configure \
  && cabal build \
  && cabal install --installdir=/app/bin
@@ -10,3 +11,4 @@ RUN clone https://github.com/hadolint/hadolint.git v2.12.0 \
 FROM scratch
 
 COPY --from=builder /app/bin/hadolint /usr/local/bin/hadolint
+ENTRYPOINT ["/usr/local/bin/hadolint"]

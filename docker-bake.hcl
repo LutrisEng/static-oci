@@ -24,6 +24,8 @@ target "docker-buildx" {
         "ghcr.io/lutriseng/static-oci/docker-buildx:latest",
         "ghcr.io/lutriseng/static-oci/docker-buildx:0.10.4"
     ]
+    cache-to = ["type=inline"]
+    cache-from = ["ghcr.io/lutriseng/static-oci/docker-buildx"]
     context = "docker-buildx"
     contexts = {
         build = "target:build"
@@ -35,6 +37,8 @@ target "docker-cli" {
         "ghcr.io/lutriseng/static-oci/docker-cli:latest",
         "ghcr.io/lutriseng/static-oci/docker-cli:23.0.5"
     ]
+    cache-to = ["type=inline"]
+    cache-from = ["ghcr.io/lutriseng/static-oci/docker-cli"]
     context = "docker-cli"
     contexts = {
         build = "target:build"
@@ -46,6 +50,8 @@ target "docker-compose" {
         "ghcr.io/lutriseng/static-oci/docker-compose:latest",
         "ghcr.io/lutriseng/static-oci/docker-compose:2.17.3"
     ]
+    cache-to = ["type=inline"]
+    cache-from = ["ghcr.io/lutriseng/static-oci/docker-compose"]
     context = "docker-compose"
     contexts = {
         build = "target:build"
@@ -57,6 +63,8 @@ target "hadolint" {
         "ghcr.io/lutriseng/static-oci/hadolint:latest",
         "ghcr.io/lutriseng/static-oci/hadolint:2.12.0"
     ]
+    cache-to = ["type=inline"]
+    cache-from = ["ghcr.io/lutriseng/static-oci/hadolint"]
     context = "hadolint"
     contexts = {
         build = "target:build"
@@ -68,6 +76,8 @@ target "helm" {
         "ghcr.io/lutriseng/static-oci/helm:latest",
         "ghcr.io/lutriseng/static-oci/helm:3.11.3"
     ]
+    cache-to = ["type=inline"]
+    cache-from = ["ghcr.io/lutriseng/static-oci/helm"]
     context = "helm"
     contexts = {
         build = "target:build"
@@ -79,6 +89,8 @@ target "kubectl" {
         "ghcr.io/lutriseng/static-oci/kubectl:latest",
         "ghcr.io/lutriseng/static-oci/kubectl:1.27.1"
     ]
+    cache-to = ["type=inline"]
+    cache-from = ["ghcr.io/lutriseng/static-oci/kubectl"]
     context = "kubectl"
     contexts = {
         build = "target:build"
@@ -90,6 +102,8 @@ target "kustomize" {
         "ghcr.io/lutriseng/static-oci/kustomize:latest",
         "ghcr.io/lutriseng/static-oci/kustomize:5.0.1"
     ]
+    cache-to = ["type=inline"]
+    cache-from = ["ghcr.io/lutriseng/static-oci/kustomize"]
     context = "kustomize"
     contexts = {
         build = "target:build"
@@ -101,6 +115,8 @@ target "overmind" {
         "ghcr.io/lutriseng/static-oci/overmind:latest",
         "ghcr.io/lutriseng/static-oci/overmind:2.4.0"
     ]
+    cache-to = ["type=inline"]
+    cache-from = ["ghcr.io/lutriseng/static-oci/overmind"]
     context = "overmind"
     contexts = {
         build = "target:build"

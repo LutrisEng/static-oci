@@ -8,3 +8,4 @@ RUN clone https://github.com/helm/helm.git v3.11.3 \
 FROM scratch
 
 COPY --from=builder /app/bin/helm /usr/local/bin/helm
+ENTRYPOINT ["/usr/local/bin/helm"]
