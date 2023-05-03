@@ -2,8 +2,10 @@
 
 FROM alpine:3.17.3
 
-RUN apk add build-base bash git go \
- && mkdir -p /app
+SHELL ["/bin/sh", "-euxo", "pipefail", "-c"]
+RUN apk add build-base bash git go cabal \
+ && mkdir -p /app \
+ && cabal update
 COPY build-go clone /usr/local/bin/
 
 WORKDIR /app

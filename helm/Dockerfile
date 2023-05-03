@@ -7,4 +7,4 @@ RUN clone https://github.com/helm/helm.git v3.11.3 \
 
 FROM scratch
 
-COPY --from=builder /app/bin/helm /bin/helm
+COPY --from=builder /app/bin/helm /usr/local/bin/helm

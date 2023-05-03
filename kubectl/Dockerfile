@@ -6,4 +6,4 @@ RUN build-go kubectl https://github.com/kubernetes/kubernetes.git v1.27.1 ./cmd/
 
 FROM scratch
 
-COPY --from=builder /app/kubectl /bin/kubectl
+COPY --from=builder /app/kubectl /usr/local/bin/kubectl
