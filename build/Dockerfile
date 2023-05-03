@@ -1,10 +1,10 @@
 # syntax=docker/dockerfile:1
 
-FROM --platform=$BUILDPLATFORM alpine:20230329
+FROM --platform=$BUILDPLATFORM alpine:3.17.3
 
 SHELL ["/bin/sh", "-euxo", "pipefail", "-c"]
-RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
- && apk add bash git go cabal zig \
+RUN apk add bash git go cabal \
+ && apk add --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing zig \
  && mkdir -p /app \
  && mkdir -p /gocache
 ENV GOOS="linux" \
