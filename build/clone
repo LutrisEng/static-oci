@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -euxo pipefail
+
+git clone "$1" /app -b "$2" --depth=1
