@@ -3,6 +3,7 @@ group "default" {
         "build",
         "docker-buildx",
         "docker-cli",
+        "docker-cli-full",
         "docker-compose",
         "hadolint",
         "helm",
@@ -14,9 +15,14 @@ group "default" {
 
 target "build" {
     tags = ["ghcr.io/lutriseng/static-oci/build"]
-    cache-to = ["type=inline"]
+    cache-to = ["type=inline,mode=max"]
     cache-from = ["ghcr.io/lutriseng/static-oci/build"]
     context = "build"
+    platforms = [
+        "linux/amd64",
+        "linux/arm64",
+        "linux/i386"
+    ]
 }
 
 target "docker-buildx" {
@@ -24,12 +30,17 @@ target "docker-buildx" {
         "ghcr.io/lutriseng/static-oci/docker-buildx:latest",
         "ghcr.io/lutriseng/static-oci/docker-buildx:0.10.4"
     ]
-    cache-to = ["type=inline"]
+    cache-to = ["type=inline,mode=max"]
     cache-from = ["ghcr.io/lutriseng/static-oci/docker-buildx"]
     context = "docker-buildx"
     contexts = {
         build = "target:build"
     }
+    platforms = [
+        "linux/amd64",
+        "linux/arm64",
+        "linux/i386"
+    ]
 }
 
 target "docker-cli" {
@@ -37,12 +48,37 @@ target "docker-cli" {
         "ghcr.io/lutriseng/static-oci/docker-cli:latest",
         "ghcr.io/lutriseng/static-oci/docker-cli:23.0.5"
     ]
-    cache-to = ["type=inline"]
+    cache-to = ["type=inline,mode=max"]
     cache-from = ["ghcr.io/lutriseng/static-oci/docker-cli"]
     context = "docker-cli"
     contexts = {
         build = "target:build"
     }
+    platforms = [
+        "linux/amd64",
+        "linux/arm64",
+        "linux/i386"
+    ]
+}
+
+target "docker-cli-full" {
+    tags = [
+        "ghcr.io/lutriseng/static-oci/docker-cli-full:latest",
+        "ghcr.io/lutriseng/static-oci/docker-cli-full:23.0.5"
+    ]
+    cache-to = ["type=inline,mode=max"]
+    cache-from = ["ghcr.io/lutriseng/static-oci/docker-cli-full"]
+    context = "docker-cli-full"
+    contexts = {
+        docker-buildx = "target:docker-buildx"
+        docker-cli = "target:docker-cli"
+        docker-compose = "target:docker-compose"
+    }
+    platforms = [
+        "linux/amd64",
+        "linux/arm64",
+        "linux/i386"
+    ]
 }
 
 target "docker-compose" {
@@ -50,12 +86,17 @@ target "docker-compose" {
         "ghcr.io/lutriseng/static-oci/docker-compose:latest",
         "ghcr.io/lutriseng/static-oci/docker-compose:2.17.3"
     ]
-    cache-to = ["type=inline"]
+    cache-to = ["type=inline,mode=max"]
     cache-from = ["ghcr.io/lutriseng/static-oci/docker-compose"]
     context = "docker-compose"
     contexts = {
         build = "target:build"
     }
+    platforms = [
+        "linux/amd64",
+        "linux/arm64",
+        "linux/i386"
+    ]
 }
 
 target "hadolint" {
@@ -63,12 +104,15 @@ target "hadolint" {
         "ghcr.io/lutriseng/static-oci/hadolint:latest",
         "ghcr.io/lutriseng/static-oci/hadolint:2.12.0"
     ]
-    cache-to = ["type=inline"]
+    cache-to = ["type=inline,mode=max"]
     cache-from = ["ghcr.io/lutriseng/static-oci/hadolint"]
     context = "hadolint"
     contexts = {
         build = "target:build"
     }
+    platforms = [
+        "linux/amd64"
+    ]
 }
 
 target "helm" {
@@ -76,12 +120,17 @@ target "helm" {
         "ghcr.io/lutriseng/static-oci/helm:latest",
         "ghcr.io/lutriseng/static-oci/helm:3.11.3"
     ]
-    cache-to = ["type=inline"]
+    cache-to = ["type=inline,mode=max"]
     cache-from = ["ghcr.io/lutriseng/static-oci/helm"]
     context = "helm"
     contexts = {
         build = "target:build"
     }
+    platforms = [
+        "linux/amd64",
+        "linux/arm64",
+        "linux/i386"
+    ]
 }
 
 target "kubectl" {
@@ -89,12 +138,17 @@ target "kubectl" {
         "ghcr.io/lutriseng/static-oci/kubectl:latest",
         "ghcr.io/lutriseng/static-oci/kubectl:1.27.1"
     ]
-    cache-to = ["type=inline"]
+    cache-to = ["type=inline,mode=max"]
     cache-from = ["ghcr.io/lutriseng/static-oci/kubectl"]
     context = "kubectl"
     contexts = {
         build = "target:build"
     }
+    platforms = [
+        "linux/amd64",
+        "linux/arm64",
+        "linux/i386"
+    ]
 }
 
 target "kustomize" {
@@ -102,12 +156,17 @@ target "kustomize" {
         "ghcr.io/lutriseng/static-oci/kustomize:latest",
         "ghcr.io/lutriseng/static-oci/kustomize:5.0.1"
     ]
-    cache-to = ["type=inline"]
+    cache-to = ["type=inline,mode=max"]
     cache-from = ["ghcr.io/lutriseng/static-oci/kustomize"]
     context = "kustomize"
     contexts = {
         build = "target:build"
     }
+    platforms = [
+        "linux/amd64",
+        "linux/arm64",
+        "linux/i386"
+    ]
 }
 
 target "overmind" {
@@ -115,10 +174,15 @@ target "overmind" {
         "ghcr.io/lutriseng/static-oci/overmind:latest",
         "ghcr.io/lutriseng/static-oci/overmind:2.4.0"
     ]
-    cache-to = ["type=inline"]
+    cache-to = ["type=inline,mode=max"]
     cache-from = ["ghcr.io/lutriseng/static-oci/overmind"]
     context = "overmind"
     contexts = {
         build = "target:build"
     }
+    platforms = [
+        "linux/amd64",
+        "linux/arm64",
+        "linux/i386"
+    ]
 }

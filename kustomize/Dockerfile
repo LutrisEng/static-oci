@@ -1,10 +1,11 @@
 # syntax=docker/dockerfile:1
 
-FROM build as builder
+FROM --platform=$BUILDPLATFORM build as builder
 
-RUN build-go kustomize https://github.com/kubernetes-sigs/kustomize.git kustomize/v5.0.1 ./kustomize
+RUN --mount=type=cache,target=/gocache build-go kustomize https://github.com/kubernetes-sigs/kustomize.git kustomize/v5.0.1 ./kustomize
 
 FROM scratch
 
-COPY --from=builder /app/kustomize /usr/local/bin/kustomize
+ARG TARGETARCH
+COPY --from=builder /app/kustomize-$TARGETARCH /usr/local/bin/kustomize
 ENTRYPOINT ["/usr/local/bin/kustomize"]

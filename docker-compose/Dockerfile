@@ -1,9 +1,10 @@
 # syntax=docker/dockerfile:1
 
-FROM build as builder
+FROM --platform=$BUILDPLATFORM build as builder
 
-RUN build-go docker-compose https://github.com/docker/compose.git v2.17.3 ./cmd
+RUN --mount=type=cache,target=/gocache build-go docker-compose https://github.com/docker/compose.git v2.17.3 ./cmd
 
 FROM scratch
 
-COPY --from=builder /app/docker-compose /usr/local/libexec/docker/cli-plugins/docker-compose
+ARG TARGETARCH
+COPY --from=builder /app/docker-compose-$TARGETARCH /usr/local/libexec/docker/cli-plugins/docker-compose

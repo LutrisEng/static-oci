@@ -3,4 +3,4 @@
 set -euxo pipefail
 
 clone "$2" "$3"
-go build -v -o "$1" "${4-}"
+build-go-impl "$1" "${4-}"

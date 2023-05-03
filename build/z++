@@ -1,0 +1,17 @@
+#!/bin/sh
+
+case $GOARCH in
+    amd64)
+        exec zig c++ -target x86_64-linux-musl "$@"
+        ;;
+    arm64)
+        exec zig c++ -target aarch64-linux-musl "$@"
+        ;;
+    386)
+        exec zig c++ -target i386-linux-musl "$@"
+        ;;
+    *)
+        echo "invalid arch: $GOARCH"
+        exit 1
+        ;;
+esac

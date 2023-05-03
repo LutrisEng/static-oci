@@ -1,11 +1,11 @@
 # syntax=docker/dockerfile:1
 
-FROM build as builder
+FROM --platform=$BUILDPLATFORM build as builder
 
-RUN clone https://github.com/helm/helm.git v3.11.3 \
- && make build
+RUN --mount=type=cache,target=/gocache build-go helm https://github.com/helm/helm.git v3.11.3 ./cmd/helm
 
 FROM scratch
 
-COPY --from=builder /app/bin/helm /usr/local/bin/helm
+ARG TARGETARCH
+COPY --from=builder /app/helm-$TARGETARCH /usr/local/bin/helm
 ENTRYPOINT ["/usr/local/bin/helm"]
