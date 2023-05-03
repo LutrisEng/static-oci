@@ -20,8 +20,7 @@ target "build" {
     context = "build"
     platforms = [
         "linux/amd64",
-        "linux/arm64",
-        "linux/i386"
+        "linux/arm64"
     ]
 }
 
@@ -38,8 +37,7 @@ target "docker-buildx" {
     }
     platforms = [
         "linux/amd64",
-        "linux/arm64",
-        "linux/i386"
+        "linux/arm64"
     ]
 }
 
@@ -56,8 +54,7 @@ target "docker-cli" {
     }
     platforms = [
         "linux/amd64",
-        "linux/arm64",
-        "linux/i386"
+        "linux/arm64"
     ]
 }
 
@@ -76,8 +73,7 @@ target "docker-cli-full" {
     }
     platforms = [
         "linux/amd64",
-        "linux/arm64",
-        "linux/i386"
+        "linux/arm64"
     ]
 }
 
@@ -94,8 +90,7 @@ target "docker-compose" {
     }
     platforms = [
         "linux/amd64",
-        "linux/arm64",
-        "linux/i386"
+        "linux/arm64"
     ]
 }
 
@@ -111,7 +106,8 @@ target "hadolint" {
         build = "target:build"
     }
     platforms = [
-        "linux/amd64"
+        "linux/amd64",
+        "linux/arm64"
     ]
 }
 
@@ -128,8 +124,7 @@ target "helm" {
     }
     platforms = [
         "linux/amd64",
-        "linux/arm64",
-        "linux/i386"
+        "linux/arm64"
     ]
 }
 
@@ -146,8 +141,7 @@ target "kubectl" {
     }
     platforms = [
         "linux/amd64",
-        "linux/arm64",
-        "linux/i386"
+        "linux/arm64"
     ]
 }
 
@@ -164,8 +158,7 @@ target "kustomize" {
     }
     platforms = [
         "linux/amd64",
-        "linux/arm64",
-        "linux/i386"
+        "linux/arm64"
     ]
 }
 
@@ -182,7 +175,6 @@ target "overmind" {
     }
     platforms = [
         "linux/amd64",
-        "linux/arm64",
-        "linux/i386"
+        "linux/arm64"
     ]
 }

@@ -7,9 +7,6 @@ case $GOARCH in
     arm64)
         exec zig c++ -target aarch64-linux-musl "$@"
         ;;
-    386)
-        exec zig c++ -target i386-linux-musl "$@"
-        ;;
     *)
         echo "invalid arch: $GOARCH"
         exit 1

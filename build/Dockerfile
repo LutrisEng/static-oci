@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM --platform=$BUILDPLATFORM alpine:3.17.3
+FROM alpine:3.17.3
 
 SHELL ["/bin/sh", "-euxo", "pipefail", "-c"]
 RUN apk add bash git go cabal \
