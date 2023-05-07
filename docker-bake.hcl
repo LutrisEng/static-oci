@@ -1,6 +1,7 @@
 group "default" {
     targets = [
         "build",
+        "cloudflared",
         "docker-buildx",
         "docker-cli",
         "docker-cli-full",
@@ -18,6 +19,23 @@ target "build" {
     cache-to = ["type=inline,mode=max"]
     cache-from = ["ghcr.io/lutriseng/static-oci/build"]
     context = "build"
+    platforms = [
+        "linux/amd64",
+        "linux/arm64"
+    ]
+}
+
+target "cloudflared" {
+    tags = [
+        "ghcr.io/lutriseng/static-oci/cloudflared:latest",
+        "ghcr.io/lutriseng/static-oci/cloudflared:2023.5.0"
+    ]
+    cache-to = ["type=inline,mode=max"]
+    cache-from = ["ghcr.io/lutriseng/static-oci/cloudflared"]
+    context = "cloudflared"
+    contexts = {
+        build = "target:build"
+    }
     platforms = [
         "linux/amd64",
         "linux/arm64"
